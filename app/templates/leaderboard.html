@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - WebApp Example</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-image: url("{% static 'assets/leader.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .leaderboard-header {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            color: black;
+        }
+
+        .medal {
+            font-size: 1em;
+        }
+
+        .user-section {
+            background-color: rgba(196, 196, 196, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            margin: 20px;
+            padding: 10px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+
+
+        .leaderboard-list {
+            width: 90%;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 0 20px;
+        }
+
+        .leaderboard-list::-webkit-scrollbar {
+            width: 8px; 
+        }
+        
+        leaderboard-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5); 
+            border-radius: 10px; 
+        }
+        
+        .leaderboard-list::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(19, 18, 18, 0.8);
+            padding: 0 20px;
+            border-radius: 25px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            width: 90%;
+            max-height: 70vh;
+            position: relative;
+        }
+        .leaderboard-item .medal {
+            font-size: 1.5em;
+            color: gold;
+            margin-left: auto; 
+        }
+        
+        .leaderboard-item:nth-of-type(1) .medal {
+            color: gold;
+        }
+        
+        .leaderboard-item:nth-of-type(2) .medal {
+            color: silver;
+        }
+        
+        .leaderboard-item:nth-of-type(3) .medal {
+            color: bronze;
+        }
+        .usesr-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 25px;
+            margin-bottom: 10px;
+            width: 100%;
+            height: 48px;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            background-color: rgba(24, 24, 24, 0.3); 
+            backdrop-filter: blur(10px);
+        }
+        
+        .bottom-nav div {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .bottom-nav i {
+            font-size: 20px;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="leaderboard-header">
+        <h1>Number of Blazers</h1>
+    </div>
+    <div class="user-section">
+        <div class="usesr-item top-user">
+            <span class="user-avatar">AB</span>
+            <div class="user-details">
+                <h4>ablaze_coder</h4>
+                <p>#1</p>
+            </div>
+            <div class="user-score">
+                300 $BLAZE
+            </div>
+        </div>
+    </div>
+    <div class="leaderboard-list">
+        {% for user in users %}
+        <div class="leaderboard-item">
+            <span class="user-avatar">{{ user.username|slice:":2" }}</span>
+            <div class="user-details">
+                <h4>{{ user.username }}</h4>
+                <p>{{ user.amount }} $BLAZE</p>
+            </div>
+            <div class="medal">{{ user.medal }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <nav class="bottom-nav">
+        <a href="{% url 'index' %}"><i class="fas fa-home"></i></a>
+        <a href="{% url 'tasks' %}"><i class="fa-solid fa-list-check" style="color: #ffffff;"></i></a>
+        <a href="{% url 'leaderboard' %}"><i class="fa-solid fa-fire"></i></a>
+        <a href="{% url 'friends' %}"><i class="fa-solid fa-user-group"></i></a>
+    </nav>
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
