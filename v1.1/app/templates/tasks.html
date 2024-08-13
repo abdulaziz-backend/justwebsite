@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks🔥</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("{% static 'assets/task.png' %}");
+            background-size: cover;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tasks-header {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            color: white;
+        }
+
+        .tasks-list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 600px; 
+            padding: 20px;
+            gap: 10px;
+            box-sizing: border-box;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px;
+            width: auto; 
+            max-width: 100%; 
+            box-sizing: border-box;
+            overflow: hidden; 
+            margin-bottom: 10px;
+        }
+
+        .task-item i {
+            font-size: 24px;
+            color: white;
+            margin-right: 15px;
+        }
+
+        .task-details h4, .task-details p {
+            margin: 0;
+            overflow-wrap: break-word; 
+        }
+
+        .task-details h4 {
+            margin-bottom: 5px;
+        }
+
+        .task-button {
+            padding: 10px 20px;
+            background-color: rgb(255, 255, 255);
+            color: black;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            align-self: flex-start;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            background-color: rgba(24, 24, 24, 0.3); 
+            backdrop-filter: blur(10px);
+        }
+
+        .bottom-nav div {
+            text-align: center;
+            flex: 1;
+        }
+
+        .bottom-nav i {
+            font-size: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="tasks-header">
+        <h2>Tasks</h2>
+    </div>
+    <div class="tasks-list">
+        {% for task in tasks %}
+        <div class="task-item">
+            <i class="fas fa-tasks"></i>
+            <div class="task-details">
+                <h4>{{ task.title }}</h4>
+                <p>{{ task.points }} $BLAZE</p>
+            </div>
+            <a href="{{ task.button_link }}" class="task-button" target="_blank">Start</a>
+            <form action="{% url 'remove_task' task.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <nav class="bottom-nav">
+        <a href="{% url 'index' %}"><i class="fas fa-home"></i></a>
+        <a href="{% url 'tasks' %}"><i class="fa-solid fa-list-check" style="color: #ffffff;"></i></a>
+        <a href="{% url 'leaderboard' %}"><i class="fa-solid fa-fire"></i></a>
+        <a href="{% url 'friends' %}"><i class="fa-solid fa-user-group"></i></a>
+    </nav>
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</body>
+</html>

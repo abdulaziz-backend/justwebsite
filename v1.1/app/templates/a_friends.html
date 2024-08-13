@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends🔥</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("{% static 'assets/aref.png' %}");
+            background-size: cover;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .af {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            opacity: 0.9;
+            padding: 15px;
+            margin: 15px;
+            width: calc(100% - 30px); 
+            max-width: 600px; 
+        }
+
+        .invite-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            opacity: 0.9;
+            padding: 15px;
+            margin: 15px;
+            text-align: center;
+        }
+
+        .dogs-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .invite-button {
+            padding: 10px 20px;
+            background-color: rgb(255, 255, 255);
+            color: black;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #friends-list-container {
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            background-color: rgba(24, 24, 24, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .bottom-nav a {
+            text-align: center;
+            flex: 1;
+            color: white;
+            text-decoration: none;
+        }
+
+        .bottom-nav i {
+            font-size: 20px;
+        }
+
+        .dogs-image {
+            width:90px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            margin-left: 60px;
+
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="af">
+        <h2>‎ ‎ ‎ ‎ ‎ ‎ ‎ Invite Blazers and get more $BLAZE</h2>
+        <div class="invite-section">
+            <img src="{% static 'assets/icon.png' %}" alt="invite" class="dogs-image">
+            <h4>Blaze the button to invite friends</h4>
+            <button class="invite-button">Invite Friends</button>
+        </div>
+        
+        <div class="friends-list">
+            <h3>Your Friends</h3>
+            <ul>
+                {% for friend in friends %}
+                    <li class="friend-item" data-username="{{ friend.username }}">{{ friend.username }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <nav class="bottom-nav">
+        <a href="{% url 'index' %}"><i class="fas fa-home"></i></a>
+        <a href="{% url 'tasks' %}"><i class="fa-solid fa-list-check" style="color: #ffffff;"></i></a>
+        <a href="{% url 'leaderboard' %}"><i class="fa-solid fa-fire"></i></a>
+        <a href="{% url 'friends' %}"><i class="fa-solid fa-user-group"></i></a>
+    </nav>
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</body>
+</html>

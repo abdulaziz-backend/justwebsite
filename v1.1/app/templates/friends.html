@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends🔥</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("{% static 'assets/ref.png' %}");
+            background-size: cover;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .inv {
+            gap: 40px;
+            color: white;
+        }
+        .friends-header {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="friends-header">
+        <h2>Invite Blazers and get more $BLAZE</h2>
+    </div>
+    <div class="invite-section">
+        <img src="{% static 'assets/icon.png' %}" alt="invite" class="iconn">
+        <h2>‎ </h2>
+        <h4 class="inv">Blaze the button to invite friends</h4>
+        <button class="invite-button">Invite Friends</button>
+    </div>
+    <nav class="bottom-nav">
+        <a href="{% url 'index' %}"><i class="fas fa-home"></i></a>
+        <a href="{% url 'tasks' %}"><i class="fa-solid fa-list-check" style="color: #ffffff;"></i></a>
+        <a href="{% url 'leaderboard' %}"><i class="fa-solid fa-fire"></i></a>
+        <a href="{% url 'friends' %}"><i class="fa-solid fa-user-group"></i></a>
+    </nav>
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</body>
+</html>
+
